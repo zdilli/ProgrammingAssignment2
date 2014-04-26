@@ -1,7 +1,12 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The functions in this file allow the user to store a special 
+## "matrix" which can be cached along with its inverse in a 
+## list structure.
 
-## Write a short comment describing this function
+## makeCacheMatrix returns a list with functions to set and 
+## retrieve a matrix and its inverse.  Whereas the vector version
+## of these programs had used NULL to initialize the mean of the 
+## vector, here we use an empty matrix to initialize the inverse 
+## of the matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
     xinv <- matrix(, nrow = 0, ncol = 0)
@@ -15,11 +20,15 @@ makeCacheMatrix <- function(x = matrix()) {
     list(set = set, get = get,
          setinv = setinv,
          getinv = getinv)
-
 }
 
-
-## Write a short comment describing this function
+## Checks if the inverse of a matrix has been cached and returns it if
+## it has been.  If not, it calculates and caches the inverse as 
+## well as returning it, so that when this is ran for a second time
+## on the same matrix, it will not recalculate but indicate
+## it is getting cached data.
+## Note that the empty matrix used to initialize the matrix inverse
+## in makeCacheMatrix(x) will return FALSE for is.numeric().
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
